@@ -101,17 +101,27 @@ function loadStatsPage()
 
 function loadPlayersPage()
 {
+
 	for (var pindex = 0; pindex < players.length; pindex++ ){
+
 		var newAnchor = document.createElement('a');
+
 		// console.log(pindex);
+		//switchPlayers(pindex);
 		newAnchor.onclick = function(arg) {
+
 		    return function() {
 		        alert(arg);
+		        //switchPlayers(pindex);
+
+		        
 		    }
-		}(pindex);
+		    
+		}(pindex);switchPlayers(pindex);
 		
 		newAnchor.innerHTML = players[pindex].name;
 		document.getElementById('player_selector').appendChild(newAnchor);
+
 		// <a href="#" onclick="switchPlayers(pindex);">players[pindex].name <a>;
 	}
 	// document.getElementById('player_selector').innerHTML = "hello";
@@ -170,7 +180,43 @@ function loadPlayersPage()
 					  avg_r_yards   - the average number of rushing yards for the player's Buff career
 					  avg_rec_yards - the average number of receiving yards for the player's Buff career
 */
+
+/*
+	players is an array to hold each player's information.
+	Fields:
+		name - Football player's name
+		img  - The relative/absolute path to the image file.
+		alt  - The alternative text that describes the image.
+		year - The student's year in college (Freshman, Sophomore, Junior, Senior).
+		major- The student's current college major.
+		games_played    - The number of football games the student has played for the Buffs.
+		pass_yards      - The total number of passing yards in the student's football career for the Buffs.
+		rushing_yards   - The total number of rushing yards in the student's football career for the Buffs.
+		receiving_yards - The total number of receiving yards in the student's football career for the Buffs.
+*/
 function switchPlayers(playerNum){
+	//NOTE I CAN'T FIGURE OUT HOW TO GET IT TO DISPLAY ANY PLAYER BUT THE LAST ONE
+
+	document.getElementById("p_year").innerHTML = players[playerNum].year;
+	document.getElementById("p_major").innerHTML = players[playerNum].major;
+	document.getElementById("g_played").innerHTML = players[playerNum].games_played;
+	document.getElementById("player_img").innerHTML = players[playerNum].img;
+	document.getElementById("p_yards").innerHTML = players[playerNum].pass_yards;
+	document.getElementById("r_yards").innerHTML = players[playerNum].rushing_yards;
+	document.getElementById("rec_yards").innerHTML = players[playerNum].receiving_yards;
+
+	var pass = parseFloat(players[playerNum].pass_yards);
+	var rush = parseFloat(players[playerNum].rushing_yards);
+	var receive = parseFloat(players[playerNum].receiving_yards);
+	var games = parseFloat(players[playerNum].games_played);
+	//var pyards = math.round(pass/games);
+	//var ryards = math.round(rush/games);
+	//var recyards = math.round(receive/games);
+	document.getElementById("avg_p_yards").innerHTML = pass/games;
+	document.getElementById("avg_r_yards").innerHTML = rush/games;
+	document.getElementById("avg_rec_yards").innerHTML = receive/games;
+
+	
 	console.log("switch caled with " + playerNum);
 }
 
